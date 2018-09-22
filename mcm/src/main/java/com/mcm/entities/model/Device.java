@@ -1,5 +1,9 @@
 package com.mcm.entities.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +24,7 @@ public class Device {
 	private int id;
 	private String phoneNumber;
 	private Actor actor;
+	private Set<Location> locations = new HashSet<Location>();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -29,6 +34,7 @@ public class Device {
 	public void setId(int id) {
 		this.id = id;
 	}
+	@Column(name="phone_num")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

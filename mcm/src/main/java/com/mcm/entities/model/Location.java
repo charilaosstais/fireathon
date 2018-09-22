@@ -2,10 +2,12 @@ package com.mcm.entities.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -20,7 +22,8 @@ public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private long latitude;
-	private long lognitude;
+	private long longtitude;
+	private Device device;
 
 	public Location() {}
 
@@ -34,6 +37,7 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 
+	@Column(name="LATITUDE")
 	public long getLatitude() {
 		return latitude;
 	}
@@ -42,12 +46,22 @@ public class Location implements Serializable {
 		this.latitude = latitude;
 	}
 
-	public long getLognitude() {
-		return lognitude;
+	@Column(name="LONGITUDE")
+	public long getLogntitude() {
+		return longtitude;
 	}
 
-	public void setLognitude(long lognitude) {
-		this.lognitude = lognitude;
+	public void setLogntitude(long lognitude) {
+		this.longtitude = lognitude;
+	}
+
+	@ManyToOne
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 	
 	
