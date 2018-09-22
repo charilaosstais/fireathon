@@ -24,7 +24,7 @@ public class Device {
 	private int id;
 	private String phoneNumber;
 	private Actor actor;
-	private Set<Location> locations = new HashSet<Location>();
+	private Location locations = new Location();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
