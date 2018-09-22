@@ -53,15 +53,32 @@ public class UserDao {
 
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public Actor getUserByUserName(String username) {
+	public List<Device> getAllDevices() {
 
-		List<Actor> users = new ArrayList<Actor>();
+		List<Device> devices = new ArrayList<Device>();
 
-		users = sessionFactory.getCurrentSession().createQuery("from User where username=?").setParameter(0, username)
-				.list();
+		devices = sessionFactory.getCurrentSession().createQuery("from Device").list();
 
-		if (users.size() > 0) {
-			return users.get(0);
+		if (devices.size() > 0) {
+			return devices;
+		} else {
+			return null;
+		}
+	}
+
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<Device> getDevicesInRange(SubMap sm) {
+
+		List<Device> devices = new ArrayList<Device>();
+
+		devices = sessionFactory.getCurrentSession().createQuery("from Device where id in SELECT phone_id FROM Location"
+				+ "WHERE location.latitude BETWEEN (? AND ?) AND location.longtitude BETWEEN (? AND ?)").
+				setParameter(0, sm.getMinLat()).setParameter(1, sm.getMaxLat())
+				.setParameter(2, sm.getMinLong()).setParameter(3, sm.getMaxLong()).list();
+
+		if (devices.size() > 0) {
+			return devices;
 		} else {
 			return null;
 		}

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mcm.entities.dao.UserDao;
+import com.mcm.entities.model.Device;
 
 @Controller
 public class MainController {
@@ -44,12 +45,30 @@ public class MainController {
 	public ModelAndView defaultPage() {
 
 		ModelAndView model = new ModelAndView();
-		//model.addObject("title", "Spring Security + Hibernate Example");
+		model.addObject("title", "MCM - Welcome");
 		//model.addObject("message", "This is default page!");
 		//model.setViewName("hello");
-		
+
+		model.setViewName("Welcome to MCM!");
+
+		return model;
+	}
+
+	@RequestMapping(value =  "/map", method = RequestMethod.GET)
+	public ModelAndView MapPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "MCM - Map View");
+		//model.addObject("message", "This is default page!");
+		//model.setViewName("hello");
+
 		model.setViewName("welcome");
+
+		//userDao.getDevicesInRange(sm);
+		List<Device> devList = userDao.getAllDevices();
 		
+		model.addObject(devList);
+
 		return model;
 	}
 
