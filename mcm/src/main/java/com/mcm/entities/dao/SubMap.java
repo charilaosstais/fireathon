@@ -2,7 +2,7 @@ package com.mcm.entities.dao;
 
 public class SubMap {
 	
-	private long minLat, maxLat, minLong, maxLong;
+	private long minLat, maxLat, minLng, maxLng;
 
 	public SubMap() {
 	}
@@ -11,8 +11,8 @@ public class SubMap {
 		super();
 		this.minLat = minLat;
 		this.maxLat = maxLat;
-		this.minLong = minLong;
-		this.maxLong = maxLong;
+		this.minLng = minLong;
+		this.maxLng = maxLong;
 	}
 
 	public long getMinLat() {
@@ -31,20 +31,20 @@ public class SubMap {
 		this.maxLat = maxLat;
 	}
 
-	public long getMinLong() {
-		return minLong;
+	public long getMinLng() {
+		return minLng;
 	}
 
-	public void setMinLong(long minLong) {
-		this.minLong = minLong;
+	public void setMinLong(long minLng) {
+		this.minLng = minLng;
 	}
 
-	public long getMaxLong() {
-		return maxLong;
+	public long getMaxLng() {
+		return maxLng;
 	}
 
-	public void setMaxLong(long maxLong) {
-		this.maxLong = maxLong;
+	public void setMaxLong(long maxLng) {
+		this.maxLng = maxLng;
 	}
 
 }
