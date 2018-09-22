@@ -22,7 +22,7 @@ public class Actor implements Serializable {
 	private String password;
 	private int type;
 	private String username;
-
+	private Set<Device> devices = new HashSet<Device>();
 	
 	public Actor() {
 	}
