@@ -18,11 +18,9 @@ public class Actor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String email;
-	private int enabled;
-	private String password;
-	private int type;
-	private String username;
+	private String name;
 	private Set<Device> devices = new HashSet<Device>();
+	private Set<TeamActor> teamActors = new HashSet<TeamActor>();
 	
 	public Actor() {
 	}
@@ -38,7 +36,7 @@ public class Actor implements Serializable {
 		this.id = id;
 	}
 
-
+	@Column(name="email")
 	public String getEmail() {
 		return this.email;
 	}
@@ -47,41 +45,36 @@ public class Actor implements Serializable {
 		this.email = email;
 	}
 
-
-	public int getEnabled() {
-		return this.enabled;
-	}
-
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
+	@Column(name="name")
+	public String getName() {
+		return name;
 	}
 
 
-	public String getPassword() {
-		return this.password;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public int getType() {
-		return this.type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
+	@OneToMany(mappedBy="actor")
+	public Set<Device> getDevices() {
+		return devices;
 	}
 
 
-	public String getUsername() {
-		return this.username;
+	public void setDevices(Set<Device> devices) {
+		this.devices = devices;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	@OneToMany(mappedBy="actor")
+	public Set<TeamActor> getTeamActors() {
+		return teamActors;
 	}
 
+
+	public void setTeamActors(Set<TeamActor> teamActors) {
+		this.teamActors = teamActors;
+	}
 	
+	
+
 }
