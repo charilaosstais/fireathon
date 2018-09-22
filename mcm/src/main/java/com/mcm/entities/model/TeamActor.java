@@ -14,19 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- * The persistent class for the Device database table.
- * 
- */
+
 @Entity
-@Table(name="DEVICE")
-@NamedQuery(name="Device.findAll", query="SELECT d FROM Device d")
-public class Device implements Serializable{
+@Table(name="TEAM_ACTOR")
+@NamedQuery(name="TeamActor.findAll", query="SELECT t FROM TeamActor t")
+public class TeamActor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String phoneNumber;
+	private Team team;
 	private Actor actor;
-	private Location location;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -36,12 +32,14 @@ public class Device implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	@Column(name="phone_num")
-	public String getPhoneNumber() {
-		return phoneNumber;
+	
+	@ManyToOne
+	@JoinColumn(name="TEAM_ID")
+	public Team getTeam() {
+		return team;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 	
 	@ManyToOne
@@ -52,5 +50,7 @@ public class Device implements Serializable{
 	public void setActor(Actor actor) {
 		this.actor = actor;
 	}
+	
+	
 
 }

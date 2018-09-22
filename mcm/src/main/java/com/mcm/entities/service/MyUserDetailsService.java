@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		
 		//List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
 
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getType());
+		List<GrantedAuthority> authorities = buildUserAuthority(0);
 		
 		return buildUserForAuthentication(user, authorities);
 		
@@ -44,7 +44,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	// org.springframework.security.core.userdetails.User
 	private User buildUserForAuthentication(com.mcm.entities.model.Actor user, List<GrantedAuthority> authorities) {
 		//return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
-		return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
+		return new User(user.getName(), "", true, true, true, true, authorities);
 	}
 
 	private List<GrantedAuthority> buildUserAuthority(int userType) {
