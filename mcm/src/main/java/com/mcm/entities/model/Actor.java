@@ -12,8 +12,8 @@ import java.util.Set;
  * 
  */
 @Entity
-@Table(name="USER")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name="ACTOR")
+@NamedQuery(name="Actor.findAll", query="SELECT a FROM Actor a")
 public class Actor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;

@@ -1,5 +1,6 @@
 package com.mcm.entities.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,18 +30,21 @@ public class Team {
 	public void setId(int id) {
 		this.id = id;
 	}
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Column(name="description")
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@Column(name="color")
 	public String getColor() {
 		return color;
 	}
