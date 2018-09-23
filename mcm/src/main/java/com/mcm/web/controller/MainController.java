@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mcm.entities.dao.UserDao;
+import com.mcm.entities.model.Actor;
 import com.mcm.entities.model.Device;
 
 @Controller
@@ -49,12 +50,13 @@ public class MainController {
 		//model.addObject("message", "This is default page!");
 		//model.setViewName("hello");
 
-		model.setViewName("Welcome to MCM!");
+		model.setViewName("welcome");
 
 		return model;
 	}
 
 	@RequestMapping(value =  "/map", method = RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView MapPage() {
 
 		ModelAndView model = new ModelAndView();
@@ -62,13 +64,16 @@ public class MainController {
 		//model.addObject("message", "This is default page!");
 		//model.setViewName("hello");
 
-		model.setViewName("welcome");
+		//model.setViewName("welcome");
 
 		//userDao.getDevicesInRange(sm);
-		List<Device> devList = userDao.getAllDevices();
-		
-		model.addObject(devList);
-
+		List<Device> devList = new ArrayList<Device>();
+		devList = userDao.getAllDevices();
+		if (devList != null)		
+			model.addObject(devList);
+		else {
+			model.addObject("No values to show");
+		}
 		return model;
 	}
 

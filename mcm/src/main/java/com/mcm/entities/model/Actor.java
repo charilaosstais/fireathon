@@ -3,6 +3,8 @@ package com.mcm.entities.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +21,7 @@ public class Actor implements Serializable {
 	private int id;
 	private String email;
 	private String name;
+	@JsonIgnore
 	private Set<Device> devices = new HashSet<Device>();
 	private Set<TeamActor> teamActors = new HashSet<TeamActor>();
 	
@@ -55,7 +58,8 @@ public class Actor implements Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy="actor")
+	@JsonIgnore
+	@OneToMany(mappedBy="actor", fetch = FetchType.EAGER)
 	public Set<Device> getDevices() {
 		return devices;
 	}
@@ -65,6 +69,7 @@ public class Actor implements Serializable {
 		this.devices = devices;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy="actor")
 	public Set<TeamActor> getTeamActors() {
 		return teamActors;

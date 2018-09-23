@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 	
-		com.mcm.entities.model.Actor user = userDao.getUserByUserName(username);
+		com.mcm.entities.model.Actor user = userDao.getUserByEmail(username);
 		
 		//List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
 

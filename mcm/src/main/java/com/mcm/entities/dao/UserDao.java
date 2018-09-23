@@ -72,8 +72,8 @@ public class UserDao {
 
 		List<Device> devices = new ArrayList<Device>();
 
-		devices = sessionFactory.getCurrentSession().createQuery("from Device where id in SELECT phone_id FROM Location"
-				+ "WHERE location.latitude BETWEEN (? AND ?) AND location.longtitude BETWEEN (? AND ?)").
+		devices = sessionFactory.getCurrentSession().createQuery("from Device where id in (SELECT location.phone_id FROM Location"
+				+ "WHERE location.latitude BETWEEN (? AND ?) AND location.longtitude BETWEEN (? AND ?))").
 				setParameter(0, sm.getMinLat()).setParameter(1, sm.getMaxLat())
 				.setParameter(2, sm.getMinLong()).setParameter(3, sm.getMaxLong()).list();
 
@@ -99,5 +99,7 @@ public class UserDao {
 			return null;
 		}
 	}
+	
+	
 	
 }
