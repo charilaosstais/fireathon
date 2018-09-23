@@ -1,0 +1,102 @@
+<html><body>
+  <div id="mapdiv"></div>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+  	function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+
+    var lonLat = new OpenLayers.LonLat(  22.753837,38.015652 )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+          
+    var zoom=16;
+
+    var markersLayer = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markersLayer);
+    downloadUrl('getxmlapi.php'
+    //http://logiskaloudia.gr/cid/getmapxml.php'
+    	, function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var id = markerElem.getAttribute('id');
+              var name = markerElem.getAttribute('name');
+              var address = markerElem.getAttribute('address');
+              var type = markerElem.getAttribute('type');
+              var point = new OpenLayers.LonLat( parseFloat(markerElem.getAttribute('lng')), 
+              	parseFloat(markerElem.getAttribute('lat')) )
+		          .transform(
+		            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+		            map.getProjectionObject() // to Spherical Mercator Projection
+		          );
+              // var point = new google.maps.LatLng(
+              //     parseFloat(markerElem.getAttribute('lat')),
+              //     parseFloat(markerElem.getAttribute('lng')));
+
+              /*var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = name
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+
+              var text = document.createElement('text');
+              text.textContent = address
+              infowincontent.appendChild(text);
+              var icon = customLabel[type] || {};*/
+              var marker = new OpenLayers.Marker(point);
+              marker.setUrl('mapicons/firefighter.png');
+              marker.display(true);
+              markersLayer.addMarker(marker);
+              /*var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label,
+                draggable: true
+              });
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+                
+              });
+              marker.addListener('dragend', function(evt) {
+                document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+                
+              });
+              
+              
+            });
+          });
+    markers.addMarker(new OpenLayers.Marker(point));*/
+    	});
+	});
+
+	function doNothing() {}  
+    map.setCenter (lonLat, zoom);
+	
+	setInterval(function() {
+    layer.clearFeatures();
+    layer.loaded = false;
+    layer.loadText();
+}, 3 * 1000);
+	
+  </script>
+</body></html>
