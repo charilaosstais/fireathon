@@ -51,7 +51,7 @@ public class MainController {
 		//model.addObject("message", "This is default page!");
 		//model.setViewName("hello");
 
-		model.setViewName("welcome");
+		model.setViewName("index");
 
 		return model;
 	}
