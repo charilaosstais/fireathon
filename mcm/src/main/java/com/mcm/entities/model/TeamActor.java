@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="TEAM_ACTOR")
@@ -42,6 +44,7 @@ public class TeamActor implements Serializable{
 		this.team = team;
 	}
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ACTOR_ID")
 	public Actor getActor() {

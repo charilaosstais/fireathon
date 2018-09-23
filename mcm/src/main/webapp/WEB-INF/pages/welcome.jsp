@@ -28,7 +28,7 @@ src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
     	console.log(data);
       $.each(data.locationList, function() {
     	//  console.log(this)
-        var pointFeatures = [];
+       // var pointFeatures = [];
         var px = this.logntitude;
         console.log(this.logntitude);
         var py = this.latitude;
@@ -36,8 +36,9 @@ src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
         var lonlat = new OpenLayers.LonLat(parseFloat(px), parseFloat(py));
         lonlat.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
         var marker = new OpenLayers.Marker(lonlat);
-        //marker.setUrl('mapicons/firefighter.png');
-        //marker.display(true);
+        
+        
+        marker.display(true);
         pointLayer.addMarker(marker);
         /*var pointGeometry = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
         var pointFeature = new OpenLayers.Feature.Vector(pointGeometry, null, {

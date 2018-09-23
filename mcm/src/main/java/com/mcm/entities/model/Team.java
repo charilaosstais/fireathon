@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the Team database table.
  * 
@@ -57,6 +59,8 @@ public class Team implements Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="team")
 	public Set<TeamActor> getTeamActors() {
 		return teamActors;

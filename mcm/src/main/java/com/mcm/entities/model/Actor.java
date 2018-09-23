@@ -69,8 +69,7 @@ public class Actor implements Serializable {
 		this.devices = devices;
 	}
 
-	@JsonIgnore
-	@OneToMany(mappedBy="actor")
+	@OneToMany(mappedBy="actor", fetch = FetchType.EAGER)
 	public Set<TeamActor> getTeamActors() {
 		return teamActors;
 	}

@@ -23,8 +23,8 @@ import javax.persistence.Table;
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private long latitude;
-	private long longtitude;
+	private Double latitude;
+	private Double longtitude;
 	private Device device;
 
 	public Location() {}
@@ -40,20 +40,20 @@ public class Location implements Serializable {
 	}
 
 	@Column(name="LATITUDE")
-	public long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	@Column(name="LONGTITUDE")
-	public long getLogntitude() {
+	public Double getLogntitude() {
 		return longtitude;
 	}
 
-	public void setLogntitude(long lognitude) {
+	public void setLogntitude(Double lognitude) {
 		this.longtitude = lognitude;
 	}
 

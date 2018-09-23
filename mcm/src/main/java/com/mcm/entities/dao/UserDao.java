@@ -95,6 +95,7 @@ public class UserDao {
 		List<Location> locations = new ArrayList<Location>();
 
 		locations = sessionFactory.getCurrentSession().createQuery("from Location").list();
+		System.out.println(locations.get(0).getLatitude());
 		return locations;
 		
 	}
