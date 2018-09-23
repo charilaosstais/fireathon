@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mcm.entities.dao.UserDao;
 import com.mcm.entities.model.Actor;
 import com.mcm.entities.model.Device;
+import com.mcm.entities.model.Location;
 
 @Controller
 public class MainController {
@@ -74,6 +75,20 @@ public class MainController {
 		else {
 			model.addObject("No values to show");
 		}
+		return model;
+	}
+	
+	@RequestMapping(value =  "/locations", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView locations() {
+
+		ModelAndView model = new ModelAndView();
+		
+		//userDao.getDevicesInRange(sm);
+		List<Location> locList = new ArrayList<Location>();
+		locList = userDao.getAllLocations();
+		model.addObject(locList);
+		
 		return model;
 	}
 

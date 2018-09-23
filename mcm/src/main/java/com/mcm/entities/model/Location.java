@@ -48,7 +48,7 @@ public class Location implements Serializable {
 		this.latitude = latitude;
 	}
 
-	@Column(name="LONGITUDE")
+	@Column(name="LONGTITUDE")
 	public long getLogntitude() {
 		return longtitude;
 	}

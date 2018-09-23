@@ -87,6 +87,17 @@ public class UserDao {
 			return null;
 		}
 	}
+	
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<Location> getAllLocations() {
+
+		List<Location> locations = new ArrayList<Location>();
+
+		locations = sessionFactory.getCurrentSession().createQuery("from Location").list();
+		return locations;
+		
+	}
 
 	@Transactional
 	@SuppressWarnings("unchecked")
