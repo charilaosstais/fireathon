@@ -36,8 +36,39 @@ src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
         var lonlat = new OpenLayers.LonLat(parseFloat(px), parseFloat(py));
         lonlat.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
         var marker = new OpenLayers.Marker(lonlat);
-        //marker.setUrl('mapicons/firefighter.png');
-        //marker.display(true);
+        var role = this.actor.team_id;
+        switch(expression) {
+	        case 0:
+	        	marker.setUrl('mapicons/citizen.png');
+	            break;
+	        case 1:
+	        	marker.setUrl('mapicons/forestfirefighter.png');
+	            break;
+	        case 2:
+	        	marker.setUrl('mapicons/doctor.png');
+	            break;
+	        case 3:
+	        	marker.setUrl('mapicons/technical.png');
+	            break;
+	        case 4:
+	        	marker.setUrl('mapicons/watersupply.png');
+	            break;
+	        case 5:
+	        	marker.setUrl('mapicons/groundworker.png');
+	            break;
+	        case 6:
+	        	marker.setUrl('mapicons/various.png');
+	            break;
+	        default:
+	            code block
+	    } 
+        marker.display(true);
+        var markerInfo = "Name: " + this.device.actor.name + "\nTeam: " + this.device.actor.teamActors.team.name; 
+        var infobox = new khtml.maplib.overlay.InfoWindow({content: markerInfo});
+
+		marker.attachEvent( 'click', function() {
+		    	infobox.open(map, this);
+		});
         pointLayer.addMarker(marker);
         /*var pointGeometry = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat);
         var pointFeature = new OpenLayers.Feature.Vector(pointGeometry, null, {
