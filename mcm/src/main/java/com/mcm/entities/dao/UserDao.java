@@ -1,6 +1,7 @@
 package com.mcm.entities.dao;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +54,27 @@ public class UserDao {
 
 	@Transactional
 	@SuppressWarnings("unchecked")
+	public boolean Register(Device dev) {
+
+		Serializable id = sessionFactory.getCurrentSession().save(dev);
+
+		if (id != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public void UpdateLocation(Device dev) {
+
+		sessionFactory.getCurrentSession().saveOrUpdate(dev);
+
+	}
+
+	@Transactional
+	@SuppressWarnings("unchecked")
 	public List<Device> getAllDevices() {
 
 		List<Device> devices = new ArrayList<Device>();
@@ -75,7 +97,7 @@ public class UserDao {
 		devices = sessionFactory.getCurrentSession().createQuery("from Device where id in SELECT phone_id FROM Location"
 				+ "WHERE location.latitude BETWEEN (? AND ?) AND location.longtitude BETWEEN (? AND ?)").
 				setParameter(0, sm.getMinLat()).setParameter(1, sm.getMaxLat())
-				.setParameter(2, sm.getMinLong()).setParameter(3, sm.getMaxLong()).list();
+				.setParameter(2, sm.getMinLng()).setParameter(3, sm.getMaxLng()).list();
 
 		if (devices.size() > 0) {
 			return devices;
